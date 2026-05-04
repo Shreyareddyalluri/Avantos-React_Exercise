@@ -1,0 +1,168 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.modal {
+  background: white;
+  border-radius: 0.75rem;
+  width: 640px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 320px;
+  overflow: hidden;
+}
+.sidebar {
+  width: 280px;
+  border-right: 1px solid #e2e8f0;
+  overflow-y: auto;
+  padding: 1rem;
+}
+.sidebarLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+.searchWrapper {
+  margin-bottom: 0.75rem;
+}
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.searchInput:focus {
+  border-color: #3b82f6;
+}
+.groupList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.groupButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.375rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334155;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.groupButton:hover {
+  background: #f1f5f9;
+}
+.groupActive {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+.chevron {
+  font-size: 0.75rem;
+  width: 1rem;
+  text-align: center;
+}
+.fieldList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 1.25rem;
+}
+.fieldButton {
+  width: 100%;
+  text-align: left;
+  padding: 0.375rem 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: #475569;
+  border-radius: 0.25rem;
+}
+.fieldButton:hover {
+  background: #f1f5f9;
+}
+.fieldSelected {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+.preview {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.previewText {
+  font-size: 0.9375rem;
+  color: #334155;
+}
+.previewEmpty {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.cancelButton {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background: white;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.05em;
+}
+.cancelButton:hover {
+  background: #f8fafc;
+}
+.selectButton {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.selectButton:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+.selectButton:not(:disabled):hover {
+  background: #2563eb;
+}

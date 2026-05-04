@@ -1,0 +1,16 @@
+{
+  "name": "avantos-react-exercise-workspace",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend start",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "test": "npm --prefix frontend test",
+    "build": "npm --prefix frontend run build"
+  }
+}

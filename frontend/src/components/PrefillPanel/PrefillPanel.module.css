@@ -1,0 +1,77 @@
+.container {
+  padding: 1.25rem;
+  flex: 1;
+  overflow-y: auto;
+}
+.header {
+  margin-bottom: 1.25rem;
+}
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+.subtitle {
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+.fieldList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.15s;
+}
+.unmapped {
+  border: 1.5px dashed #cbd5e1;
+  cursor: pointer;
+  background: #f8fafc;
+}
+.unmapped:hover {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+.mapped {
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+.fieldContent {
+  flex: 1;
+  min-width: 0;
+}
+.fieldLabel {
+  font-size: 0.875rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+.fieldLabelEmpty {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+.clearButton {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  background: #e2e8f0;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  transition: all 0.15s;
+}
+.clearButton:hover {
+  background: #ef4444;
+  color: white;
+}
