@@ -82,9 +82,10 @@ export interface UISchemaElement {
 
 /** A single prefill mapping: "this field gets its value from sourceForm.sourceField" */
 export interface PrefillMapping {
-  sourceFormNodeId: string;
-  sourceFormName: string;
-  sourceFieldKey: string;
+  sourceType: "form" | "global";
+  sourceId: string;        // nodeId OR globalId
+  sourceName: string;
+  fieldKey: string;
 }
 
 /** A field available for selection in the prefill modal */

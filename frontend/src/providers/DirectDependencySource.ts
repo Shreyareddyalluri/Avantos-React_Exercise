@@ -20,11 +20,10 @@ export class DirectDependencySource implements PrefillDataSource {
   ): DataSourceGroup[] {
     const directDeps = getDirectDependencies(graph, targetNodeId);
 
-    return directDeps
-      .map((depNodeId) => {
+    return directDeps.flatMap((depNodeId) => {
         const node = getNodeById(graph, depNodeId);
         const formDef = getFormDefinitionForNode(graph, depNodeId);
-        if (!node || !formDef) return null;
+        if (!node || !formDef) return [];
 
         const fields: DataField[] = Object.entries(
           formDef.field_schema.properties
@@ -35,13 +34,14 @@ export class DirectDependencySource implements PrefillDataSource {
             fieldLabel: prop.title || key,
           }));
 
-        return {
-          sourceId: depNodeId,
-          sourceName: node.data.name,
-          sourceType: "form" as const,
-          fields,
-        };
-      })
-      .filter((group): group is DataSourceGroup => group !== null);
+        return [
+          {
+            sourceId: depNodeId,
+            sourceName: node.data.name,
+            sourceType: "form" as const,
+            fields,
+          },
+        ];
+      });
   }
 }

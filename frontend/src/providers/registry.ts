@@ -3,26 +3,35 @@ import { DirectDependencySource } from "./DirectDependencySource";
 import { TransitiveDependencySource } from "./TransitiveDependencySource";
 import { GlobalDataSource } from "./GlobalDataSource";
 
+// Central registry for managing all PrefillDataSource instances
+const registry = new Map<string, PrefillDataSource>();
+
 /**
- * Registry of all active prefill data sources.
- *
- * To add a new data source:
- * 1. Create a class implementing PrefillDataSource
- * 2. Add an instance to this array
- *
- * To remove a data source, simply remove it from this array.
- * No other code changes are required.
+ * Registers a new data source in the registry
+ * @param source - The PrefillDataSource to register
  */
-const dataSources: PrefillDataSource[] = [
-  new DirectDependencySource(),
-  new TransitiveDependencySource(),
-  new GlobalDataSource(),
-];
+export function registerDataSource(source: PrefillDataSource) {
+  registry.set(source.id, source);
+}
 
+/**
+ * Retrieves all registered data sources
+ * @returns Array of all PrefillDataSource instances
+ */
 export function getRegisteredDataSources(): PrefillDataSource[] {
-  return dataSources;
+  return Array.from(registry.values());
 }
 
+/**
+ * Retrieves a specific data source by its id
+ * @param id - The identifier of the data source
+ * @returns The PrefillDataSource if found, otherwise undefined
+ */
 export function getDataSourceById(id: string): PrefillDataSource | undefined {
-  return dataSources.find((ds) => ds.id === id);
+  return registry.get(id);
 }
+
+// Initial registration (can be moved elsewhere if needed)
+registerDataSource(new DirectDependencySource());
+registerDataSource(new TransitiveDependencySource());
+registerDataSource(new GlobalDataSource());

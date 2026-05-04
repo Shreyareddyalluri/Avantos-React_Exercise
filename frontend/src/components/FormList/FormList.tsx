@@ -10,7 +10,7 @@ interface FormListProps {
 }
 
 export function FormList({ nodes, selectedNodeId, onSelectNode }: FormListProps) {
-  // Sort by x position to approximate DAG left-to-right order
+  // Organize forms by x position to display in natural left-to-right DAG order
   const sorted = [...nodes].sort((a, b) => a.position.x - b.position.x);
 
   return (

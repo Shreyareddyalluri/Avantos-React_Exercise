@@ -53,7 +53,7 @@ export function PrefillPanel({
               <div className={styles.fieldContent}>
                 {isMapped ? (
                   <span className={styles.fieldLabel}>
-                    {key}: {mapping.sourceFormName}.{mapping.sourceFieldKey}
+                    {key}: {mapping.sourceName}.{mapping.fieldKey}
                   </span>
                 ) : (
                   <span className={styles.fieldLabelEmpty}>

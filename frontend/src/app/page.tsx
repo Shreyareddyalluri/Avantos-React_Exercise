@@ -13,10 +13,17 @@ export default function Home() {
   const { graph, loading, error } = useBlueprintGraph();
   const { setMapping, clearMapping, getMappingsForNode } =
     usePrefillMappings();
+
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [modalFieldKey, setModalFieldKey] = useState<string | null>(null);
 
-  const availableData = useAvailablePrefillData(graph, selectedNodeId);
+  // Ensure strict boolean
+  const isReadyForPrefill = !!graph && !!selectedNodeId;
+
+  const availableData = useAvailablePrefillData(
+    graph,
+    selectedNodeId ?? null
+  );
 
   if (loading) {
     return (
@@ -79,14 +86,15 @@ export default function Home() {
       </div>
 
       <PrefillModal
-        isOpen={modalFieldKey !== null}
-        availableData={availableData}
+        isOpen={isReadyForPrefill && modalFieldKey !== null}
+        availableData={isReadyForPrefill ? availableData : []}
         onSelect={(sourceId, sourceName, fieldKey) => {
           if (selectedNodeId && modalFieldKey) {
             setMapping(selectedNodeId, modalFieldKey, {
-              sourceFormNodeId: sourceId,
-              sourceFormName: sourceName,
-              sourceFieldKey: fieldKey,
+              sourceType: "form",       // ✅ REQUIRED
+              sourceId: sourceId,       // ✅ matches type
+              sourceName: sourceName,   // ✅ matches type
+              fieldKey: fieldKey,       // ✅ matches type
             });
           }
           setModalFieldKey(null);

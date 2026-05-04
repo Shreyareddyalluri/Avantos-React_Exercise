@@ -25,6 +25,8 @@ export function getTransitiveDependencies(
   const visited = new Set<string>();
   const queue = [...getDirectDependencies(graph, nodeId)];
 
+  // We guard against cycles using a visited set,
+  // even though the backend guarantees a DAG.
   while (queue.length > 0) {
     const current = queue.shift()!;
     if (visited.has(current)) continue;

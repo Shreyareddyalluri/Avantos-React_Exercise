@@ -1,4 +1,9 @@
-import { BlueprintGraph, DataSourceGroup, DataField } from "@/types";
+import {
+  BlueprintGraph,
+  DataSourceGroup,
+  DataField,
+  FieldProperty,
+} from "@/types";
 import {
   getDirectDependencies,
   getTransitiveDependencies,
@@ -26,31 +31,33 @@ export class TransitiveDependencySource implements PrefillDataSource {
     const directDeps = new Set(getDirectDependencies(graph, targetNodeId));
     const allAncestors = getTransitiveDependencies(graph, targetNodeId);
 
-    // Only include ancestors that are NOT direct dependencies
-    const transitiveOnly = allAncestors.filter((id) => !directDeps.has(id));
+    const transitiveOnly = Array.from(
+      new Set(allAncestors.filter((id) => !directDeps.has(id)))
+    );
 
-    return transitiveOnly
-      .map((depNodeId) => {
-        const node = getNodeById(graph, depNodeId);
-        const formDef = getFormDefinitionForNode(graph, depNodeId);
-        if (!node || !formDef) return null;
+    return transitiveOnly.flatMap((depNodeId) => {
+      const node = getNodeById(graph, depNodeId);
+      const formDef = getFormDefinitionForNode(graph, depNodeId);
+      if (!node || !formDef) return [];
 
-        const fields: DataField[] = Object.entries(
-          formDef.field_schema.properties
-        )
-          .filter(([_, prop]) => prop.avantos_type !== "button")
-          .map(([key, prop]) => ({
-            fieldKey: key,
-            fieldLabel: prop.title || key,
-          }));
+      const properties = formDef.field_schema
+        .properties as Record<string, FieldProperty>;
 
-        return {
+      const fields: DataField[] = Object.entries(properties)
+        .filter(([_, prop]) => prop.avantos_type !== "button")
+        .map(([key, prop]) => ({
+          fieldKey: key,
+          fieldLabel: prop.title ?? key,
+        }));
+
+      return [
+        {
           sourceId: depNodeId,
           sourceName: node.data.name,
           sourceType: "form" as const,
           fields,
-        };
-      })
-      .filter((group): group is DataSourceGroup => group !== null);
+        },
+      ];
+    });
   }
 }
